@@ -100,20 +100,6 @@ mapping with nested endpoints.
     /comments/_search.get.json      | GET /comments/search
     /comments/any/index.get.json    | GET /comments/:id/
 
-You can even add query parameters to your filenames to return different
-responses on the same route. If the all query params in a filename match the
-incoming request, this file will be returned. It will fall back to returning the
-file with no query params if it exists.
-
-*Warning this will be deprecated in the future since canned now supports
-multiple response based on the request body or GET URL parameters in one file.
-This is the prefered way since files with ? in the name do not work on Windows*
-
-    file                            | resquest
-    /index?name=Superman.get.json   | GET /?name=Superman&NotAllParams=NeedToMatch
-    /_search?q=hello.get.json       | GET /comments/search?q=hello
-    /_search.get.json               | GET /comments/search?iam=soignored
-
 Same support is available for PUT, POST, etc.
 
     /index.post.json            | POST serves /... + CORS Headers

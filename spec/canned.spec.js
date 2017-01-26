@@ -195,33 +195,6 @@ describe('canned', function () {
       can(req, res)
     })
 
-    it('looks for _file with query params', function (done) {
-      req.url = '/a?name=Superman&age=30&idontneed=everyparaminfilename'
-      res.end = function (content) {
-        expect(content).toContain('Superman!')
-        done()
-      }
-      can(req, res)
-    })
-
-    it('looks for index file with query params', function (done) {
-      req.url = '/?name=Superman'
-      res.end = function (content) {
-        expect(content).toContain('Superman!')
-        done()
-      }
-      can(req, res)
-    })
-
-    it('can tell different query param files a part', function (done) {
-      req.url = '/a?name=Batman&age=30&idontneed=everyparaminfilename'
-      res.end = function (content) {
-        expect(content).toContain('Batman!')
-        done()
-      }
-      can(req, res)
-    })
-
     it('falls back to file without query params if one or more params dont match', function (done) {
       req.url = '/a?foo=bar'
       res.end = function (content) {
@@ -550,33 +523,6 @@ describe('canned', function () {
   })
 
   describe("Issues", function () {
-    it("#49", function (done) {
-      req.url = "/regexmatchbug?u=root&p=root&q=select+mean(value)+from+%22Coraid.1Controller.ZFS.VOps-3008.gauge.wlat%22+where+time+%3E++now()+-+86400000000u+and+time+%3C+now()+-+0u+group+by+time(240000000u)+fill(null)"
-      res.end = function (content) {
-        var response = JSON.parse(content)
-        expect(response.itworks).toBeTruthy()
-        done()
-      }
-      can(req, res)
-    })
-
-    it("#58", function(done) {
-      req.url = "/multiple_get_responses?" + querystring.stringify({foo: "apostrophe"})
-      res.end = function(content) {
-        expect(content).toEqual(JSON.stringify({"response": "response with 'apostrophes'"}))
-        done()
-      }
-      can(req, res)
-    })
-
-    it("#73", function (done) {
-      req.url = "/multiple_get_responses?" + querystring.stringify({"foo": "bar", "index": 1})
-      res.end = function (content) {
-        expect(content).toEqual(JSON.stringify({"response": "response with index 1"}))
-        done()
-      }
-      can(req, res)
-    })
 
     it("#79", function (done) {
         var Canned = require('../lib/canned')

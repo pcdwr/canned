@@ -3,6 +3,10 @@ CURRENT_BRANCH=$(shell git rev-parse --abbrev-ref HEAD)
 
 default: hint test
 
+test-debug:
+	node --nolazy --debug-brk=5858 ./node_modules/.bin/jasmine-node --captureExceptions spec
+	cd test && ./bin_test.sh
+
 test:
 	./node_modules/.bin/jasmine-node --captureExceptions spec
 	cd test && ./bin_test.sh
